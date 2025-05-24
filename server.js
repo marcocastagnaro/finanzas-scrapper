@@ -22,8 +22,9 @@ app.get('/price', async (req, res) => {
 
     let browser;
     try {
-        browser = await puppeteer.launch({ headless: 'new' });
-        const page = await browser.newPage();
+        browser = await puppeteer.launch({
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        });        const page = await browser.newPage();
 
         const url = `https://www.tradingview.com/symbols/${ticker}/`;
         console.log(`Navegando a ${url}...`);
